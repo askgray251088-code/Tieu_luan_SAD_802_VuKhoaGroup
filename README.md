@@ -1,7 +1,7 @@
-# Tieu_luan_SAD_802_VuKhoaGroup
-Bai tieu luan nhom Vu Khoa
-- Hệ thống đặt bàn nhà hàng
-- Danh sách thành viên:
+# Hệ thống đặt bàn nhà hàng
+- Bài tiểu luận nhóm Vũ Khoa
+## Danh sách thành viên
+- Hệ thống được thực hiện bởi 4 thành viên:
 
 | STT | Họ và Tên | Vai trò & Nhiệm vụ |
 | :--- | :--- | :--- | 
