@@ -5,7 +5,7 @@
 
 | STT | Họ và Tên | Vai trò & Nhiệm vụ |
 | :--- | :--- | :--- | 
-| **1** | Đặng Vũ Khoa | Làm giao diện cho admin |
+| **1** | Đặng Vũ Khoa | Phân tích và kiểm thử, làm báo cáo |
 | **2** | Phan Hoàng Tấn Dũng | Thiết kế dữ liệu, viết logic thuật toán và các chức năng dịch vụ  | 
 | **3** | Huỳnh Tuấn Kiệt | Làm giao diện cho user |
-| **4** | Trịnh Nguyễn Kỳ Anh | Phân tích và kiểm thử, làm báo cáo |
+| **4** | Trịnh Nguyễn Kỳ Anh | Làm giao diện cho admin |
