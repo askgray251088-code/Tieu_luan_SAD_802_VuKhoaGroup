@@ -1,5 +1,5 @@
 # Hệ thống đặt bàn nhà hàng
-- Bài tiểu luận nhóm Vũ Khoa
+- Đề tài nhóm Vũ Khoa
 ## Danh sách thành viên
 - Hệ thống được thực hiện bởi 4 thành viên:
 
