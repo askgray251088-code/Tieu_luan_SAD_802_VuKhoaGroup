@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% block body %}
+<div class="card"><h2>Đặt bàn trực tuyến</h2>
+<form method="post" action="{{ url_for('dat_ban') }}" id="f">
+ <div class="row"><div><label>Ngày giờ đến</label><input type="datetime-local" name="start" id="start" required step="900"></div>
+ <div><label>Số người</label><input type="number" name="party" id="party" min="1" max="20" value="2" required></div>
+ <div><label>Khu vực</label><select name="area" id="area"><option value="">Tất cả</option>{% for a in areas %}<option value="{{ a.ma_khu_vuc }}">{{ a.ten_khu_vuc }}</option>{% endfor %}</select></div></div>
+ <label>Bàn trống (bấm để chọn, hoặc để hệ thống tự xếp bàn vừa nhất)</label>
+ <div id="tables" class="legend">Chọn ngày giờ để xem bàn trống…</div><input type="hidden" name="ma_ban" id="ma_ban">
+ <div class="row"><div><label>Họ tên</label><input name="ho_ten" required></div><div><label>Số điện thoại</label><input name="sdt" required></div></div>
+ <label>Email (không bắt buộc)</label><input name="email" type="email"><label>Ghi chú</label><input name="ghi_chu" maxlength="200">
+ <p><button>Xác nhận đặt bàn</button></p></form></div>
+<script>
+const $=id=>document.getElementById(id);
+async function load(){
+  if(!$('start').value) return;
+  const q=new URLSearchParams({start:$('start').value,party:$('party').value,area:$('area').value});
+  const t=await (await fetch('/api/availability?'+q)).json(); $('ma_ban').value='';
+  $('tables').innerHTML=t.length?t.map(x=>`<button type="button" class="sec" style="margin:3px" onclick="pick(this,${x.ma_ban})">${x.ten_ban} · ${x.suc_chua} chỗ · ${x.ten_khu_vuc}</button>`).join(''):'Không còn bàn trống, vui lòng chọn giờ khác';
+}
+function pick(el,id){$('ma_ban').value=id;document.querySelectorAll('#tables button').forEach(b=>b.style.outline='');el.style.outline='3px solid #1565c0'}
+['start','party','area'].forEach(i=>$(i).addEventListener('change',load));
+</script>{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}{% block body %}
+<div class="card"><h2>Sơ đồ bàn</h2>
+<div class="row" style="margin-bottom:10px"><div><label>Xem tại thời điểm</label><input type="datetime-local" id="at"></div></div>
+<div class="legend"><span><i class="dot s-TRONG"></i>Trống</span><span><i class="dot s-DA_DAT"></i>Đã đặt</span><span><i class="dot s-DANG_PHUC_VU"></i>Đang phục vụ</span><span><i class="dot s-BAO_TRI"></i>Bảo trì</span></div>
+<div id="maps"></div><p id="info" style="color:#555">Bấm vào bàn để xem chi tiết.</p></div>
+<div class="card"><h2>Danh sách khách ngày
+<form style="display:inline"><input type="date" name="ngay" value="{{ day }}" onchange="this.form.submit()" style="width:auto"></form></h2>
+<table><tr><th>Giờ</th><th>Khách</th><th>SĐT</th><th>Bàn</th><th>Người</th><th>Trạng thái</th><th></th></tr>
+{% for d in ds %}<tr><td>{{ d.thoi_gian_bat_dau.strftime('%H:%M') }}</td><td>{{ d.ho_ten }}</td><td>{{ d.so_dien_thoai }}</td><td>{{ d.ten_ban }}</td><td>{{ d.so_nguoi }}</td>
+<td><span class="tag {{ d.trang_thai }}">{{ TT[d.trang_thai] }}</span></td><td><a href="{{ url_for('check_in_page', code=d.ma_xac_nhan) }}">Mở</a></td></tr>
+{% else %}<tr><td colspan="7">Chưa có lượt đặt</td></tr>{% endfor %}</table></div>
+<script>
+const NAME={TRONG:'Trống',DA_DAT:'Đã đặt',DANG_PHUC_VU:'Đang phục vụ',BAO_TRI:'Bảo trì'};
+async function load(){
+  const at=document.getElementById('at').value; const data=await (await fetch('/api/so-do-ban'+(at?'?at='+at:''))).json();
+  const areas={}; data.forEach(t=>(areas[t.ten_khu_vuc]=areas[t.ten_khu_vuc]||[]).push(t));
+  document.getElementById('maps').innerHTML=Object.entries(areas).map(([k,ts])=>`<h4>${k}</h4><div class="map">`+ts.map(t=>
+   `<div class="tbl s-${t.trang_thai}" style="left:${t.vi_tri_x}px;top:${t.vi_tri_y}px" onclick='show(${JSON.stringify(t)})'>${t.ten_ban}<small>${t.suc_chua} chỗ</small></div>`).join('')+`</div>`).join('');
+}
+function show(t){const d=t.dat_ban;document.getElementById('info').innerHTML=`<b>Bàn ${t.ten_ban}</b> – ${NAME[t.trang_thai]}`+(d?` · ${d.ho_ten}, ${d.so_nguoi} người, ${d.thoi_gian_bat_dau}–${d.thoi_gian_ket_thuc} · <a href="/check-in/${d.ma_xac_nhan}">${d.ma_xac_nhan}</a>`:'')}
+document.getElementById('at').addEventListener('change',load); load(); setInterval(load,15000);
+</script>{% endblock %}

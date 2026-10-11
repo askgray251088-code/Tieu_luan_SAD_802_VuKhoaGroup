@@ -1,0 +1,6 @@
+{% extends "base.html" %}{% block body %}
+<div class="card"><h2>Tra cứu đặt bàn</h2>
+<form method="post"><label>Mã xác nhận hoặc số điện thoại</label><input name="q" required><p><button>Tra cứu</button></p></form></div>
+{% if ds %}<div class="card"><table><tr><th>Mã</th><th>Thời gian</th><th>Bàn</th><th>Người</th><th>Trạng thái</th></tr>
+{% for d in ds %}<tr><td><a href="{{ url_for('xac_nhan', code=d.ma_xac_nhan) }}">{{ d.ma_xac_nhan }}</a></td><td>{{ d.thoi_gian_bat_dau.strftime('%d/%m %H:%M') }}</td><td>{{ d.ten_ban }}</td><td>{{ d.so_nguoi }}</td><td><span class="tag {{ d.trang_thai }}">{{ TT[d.trang_thai] }}</span></td></tr>{% endfor %}</table></div>{% endif %}
+{% endblock %}
