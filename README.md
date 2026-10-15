@@ -4,7 +4,7 @@
 - Hệ thống được thực hiện bởi 4 thành viên:
 
 | STT | Họ và Tên | Vai trò | Nhiệm vụ chính |
-| :--- | :--- | :--- | 
+| :--- | :--- | :--- | :--- | 
 | **1** | Đặng Vũ Khoa| Trưởng nhóm + BA | Phân tích, viết tài liệu, quản lý tiến độ |
 | **2** | Huỳnh Tuấn Kiệt| Thiết kế hệ thống + CSDL | UML, ERD, MySQL |
 | **3** | Phan Hoàng Tấn Dũng  | Backend Developer | Python, MySQL, Flask |
