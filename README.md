@@ -7,6 +7,6 @@
 | :--- | :--- | :--- | 
 | **1** | Đặng Vũ Khoa| Trưởng nhóm + BA | Phân tích, viết tài liệu, quản lý tiến độ |
 | **2** | Huỳnh Tuấn Kiệt| Thiết kế hệ thống + CSDL | UML, ERD, MySQL |
-| **3** | Phan Hoàng Tấn Dũng|  | Backend Developer | Python, MySQL, Flask |
+| **3** | Phan Hoàng Tấn Dũng  | Backend Developer | Python, MySQL, Flask |
 | **4** | Trịnh Nguyễn Kỳ Anh | Frontend + QA | HTML/CSS/JS, pytest |
 
