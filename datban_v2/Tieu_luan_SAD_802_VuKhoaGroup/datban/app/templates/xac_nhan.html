@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block body %}
+<div class="card"><h2>Mã đặt bàn: {{ r.ma_xac_nhan }} <span class="tag {{ r.trang_thai }}">{{ TT[r.trang_thai] }}</span></h2>
+<div class="row"><div>
+<p><b>Khách:</b> {{ r.ho_ten }} – {{ r.so_dien_thoai }}</p>
+<p><b>Thời gian:</b> {{ r.thoi_gian_bat_dau.strftime('%d/%m/%Y %H:%M') }} – {{ r.thoi_gian_ket_thuc.strftime('%H:%M') }}</p>
+<p><b>Bàn:</b> {{ r.ten_ban }} ({{ r.suc_chua }} chỗ, {{ r.ten_khu_vuc }}) · <b>Số người:</b> {{ r.so_nguoi }}</p>
+{% if r.ghi_chu %}<p><b>Ghi chú:</b> {{ r.ghi_chu }}</p>{% endif %}
+<p style="color:#666">Đưa mã QR này cho nhân viên khi đến (check-in từ 15 phút trước đến 15 phút sau giờ đặt).</p></div>
+<div style="max-width:200px">{{ qr|safe }}</div></div></div>
+{% if r.trang_thai == 'DA_XAC_NHAN' %}<div class="card"><h3>Đổi lịch / Hủy</h3>
+<form method="post" action="{{ url_for('doi', code=r.ma_xac_nhan) }}" class="row">
+<div><label>Giờ mới</label><input type="datetime-local" name="start" value="{{ r.thoi_gian_bat_dau.strftime('%Y-%m-%dT%H:%M') }}" step="900"></div>
+<div><label>Số người</label><input type="number" name="party" min="1" max="20" value="{{ r.so_nguoi }}"></div>
+<div style="align-self:end"><button>Cập nhật</button></div></form>
+<form method="post" action="{{ url_for('huy', code=r.ma_xac_nhan) }}" style="margin-top:12px" onsubmit="return confirm('Hủy đặt bàn này?')"><button class="sec">Hủy đặt bàn</button></form></div>{% endif %}
+{% endblock %}

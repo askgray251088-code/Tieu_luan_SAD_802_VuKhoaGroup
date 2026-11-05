@@ -1,0 +1,5 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đặt bàn nhà hàng</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body>
+<header><b>🍽 Nhà hàng Hương Việt</b><a href="{{ url_for('index') }}">Đặt bàn</a><a href="{{ url_for('tra_cuu') }}">Tra cứu</a><a href="{{ url_for('nhan_vien') }}">Nhân viên</a></header>
+<main>{% for cat, msg in get_flashed_messages(with_categories=true) %}<div class="flash {{ cat }}">{{ msg }}</div>{% endfor %}
+{% block body %}{% endblock %}</main></body></html>

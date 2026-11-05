@@ -1,0 +1,21 @@
+{% extends "base.html" %}{% block body %}
+<div class="card"><h2>Quản lý bàn</h2>
+{% for t in tables %}<form method="post" action="{{ url_for('luu_ban') }}" class="rowcard"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><input type="hidden" name="ma_ban" value="{{ t.ma_ban }}">
+<div><label>Tên bàn</label><input name="ten_ban" value="{{ t.ten_ban }}" maxlength="20" required></div>
+<div><label>Khu vực</label><select name="ma_khu_vuc">{% for a in areas %}<option value="{{ a.ma_khu_vuc }}" {{ 'selected' if a.ma_khu_vuc == t.ma_khu_vuc }}>{{ a.ten_khu_vuc }}</option>{% endfor %}</select></div>
+<div><label>Sức chứa</label><input name="suc_chua" type="number" min="1" max="20" value="{{ t.suc_chua }}"></div>
+<div><label>X</label><input name="x" type="number" value="{{ t.vi_tri_x }}"></div><div><label>Y</label><input name="y" type="number" value="{{ t.vi_tri_y }}"></div>
+<div style="flex:0"><button class="small">Lưu</button></div>
+<div style="flex:0"><button class="small sec" formaction="{{ url_for('bao_tri', ma_ban=t.ma_ban) }}" name="bat" value="{{ 0 if t.bao_tri else 1 }}">{{ 'Hết bảo trì' if t.bao_tri else 'Bảo trì' }}</button></div>
+<div style="flex:0"><button class="small danger" formaction="{{ url_for('xoa_ban', ma_ban=t.ma_ban) }}" onclick="return confirm('Xóa bàn {{ t.ten_ban }}?')">Xóa</button></div></form>{% endfor %}
+<h3>Thêm bàn mới</h3>
+<form method="post" action="{{ url_for('luu_ban') }}" class="rowcard"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+<div><label>Tên bàn</label><input name="ten_ban" maxlength="20" required></div>
+<div><label>Khu vực</label><select name="ma_khu_vuc">{% for a in areas %}<option value="{{ a.ma_khu_vuc }}">{{ a.ten_khu_vuc }}</option>{% endfor %}</select></div>
+<div><label>Sức chứa</label><input name="suc_chua" type="number" min="1" max="20" value="4"></div>
+<div><label>X</label><input name="x" type="number" value="20"></div><div><label>Y</label><input name="y" type="number" value="20"></div>
+<div style="flex:0"><button class="small">Thêm</button></div></form></div>
+<div class="card"><h2>Khu vực</h2>
+{% for a in areas %}<form method="post" action="{{ url_for('xoa_khu_vuc', ma_khu_vuc=a.ma_khu_vuc) }}" class="rowcard"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><div><b>{{ a.ten_khu_vuc }}</b> <span class="muted">{{ a.mo_ta or '' }}</span></div><div style="flex:0"><button class="small danger">Xóa</button></div></form>{% endfor %}
+<form method="post" action="{{ url_for('them_khu_vuc') }}" class="rowcard"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><div><label>Tên khu vực mới</label><input name="ten" maxlength="50" required></div><div><label>Mô tả</label><input name="mo_ta" maxlength="200"></div><div style="flex:0"><button class="small">Thêm</button></div></form></div>
+{% endblock %}

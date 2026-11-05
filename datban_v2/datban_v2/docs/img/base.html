@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Đặt bàn nhà hàng Hương Việt</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"></head><body>
+<header><b>Nhà hàng Hương Việt</b>
+<a href="{{ url_for('index') }}">Đặt bàn</a><a href="{{ url_for('tra_cuu') }}">Tra cứu</a>
+{% if session.user %}<a href="{{ url_for('nhan_vien') }}">Nhân viên</a>
+{% if session.user.vai_tro == 'QUAN_LY' %}<a href="{{ url_for('quan_ly_ban') }}">Bàn</a><a href="{{ url_for('nhan_su') }}">Nhân sự</a><a href="{{ url_for('nhat_ky') }}">Nhật ký</a>{% endif %}
+<span class="who">{{ session.user.ho_ten }}</span>
+<form method="post" action="{{ url_for('dang_xuat') }}"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><button class="linkbtn">Đăng xuất</button></form>
+{% else %}<a href="{{ url_for('dang_nhap') }}">Đăng nhập</a>{% endif %}</header>
+<main>{% for cat, msg in get_flashed_messages(with_categories=true) %}<div class="flash {{ cat }}">{{ msg }}</div>{% endfor %}
+{% block body %}{% endblock %}</main></body></html>

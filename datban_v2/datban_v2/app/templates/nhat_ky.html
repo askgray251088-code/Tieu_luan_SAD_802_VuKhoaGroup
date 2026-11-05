@@ -1,0 +1,3 @@
+{% extends "base.html" %}{% block body %}
+<div class="card"><h2>Nhật ký thao tác (200 dòng gần nhất)</h2><div style="overflow-x:auto"><table><tr><th>Thời gian</th><th>Mã đặt bàn</th><th>Hành động</th><th>Chi tiết</th><th>Người thực hiện</th></tr>
+{% for l in logs %}<tr><td>{{ l.thoi_gian.strftime('%d/%m %H:%M:%S') }}</td><td><a href="{{ url_for('xac_nhan', code=l.ma_xac_nhan) }}">{{ l.ma_xac_nhan }}</a></td><td>{{ l.hanh_dong }}</td><td>{{ l.chi_tiet or '' }}</td><td>{{ l.nhan_vien or 'Khách / Hệ thống' }}</td></tr>{% else %}<tr><td colspan="5">Chưa có nhật ký</td></tr>{% endfor %}</table></div></div>{% endblock %}

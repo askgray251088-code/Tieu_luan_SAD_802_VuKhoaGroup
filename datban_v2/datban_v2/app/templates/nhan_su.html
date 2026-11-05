@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block body %}
+<div class="card"><h2>Tài khoản nhân viên</h2>
+{% for s in staff %}<div class="rowcard"><div><b>{{ s.ho_ten }}</b><br><span class="muted">{{ s.ten_dang_nhap }} · {{ 'Quản lý' if s.vai_tro == 'QUAN_LY' else 'Nhân viên' }} · {{ 'Đang hoạt động' if s.kich_hoat else 'Đã khóa' }}</span></div>
+<form method="post" action="{{ url_for('khoa_nhan_su', ma_nv=s.ma_nhan_vien) }}" style="flex:0"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><input type="hidden" name="kich_hoat" value="{{ 0 if s.kich_hoat else 1 }}"><button class="small sec">{{ 'Khóa' if s.kich_hoat else 'Mở khóa' }}</button></form>
+<form method="post" action="{{ url_for('doi_mat_khau', ma_nv=s.ma_nhan_vien) }}" class="rowcard" style="border:0;margin:0;padding:0"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><div><input name="password" type="password" placeholder="Mật khẩu mới (≥ 6 ký tự)" required></div><div style="flex:0"><button class="small">Đặt lại</button></div></form></div>{% endfor %}
+<h3>Thêm tài khoản</h3>
+<form method="post" action="{{ url_for('them_nhan_su') }}" class="rowcard"><input type="hidden" name="_csrf" value="{{ csrf_token() }}">
+<div><label>Tên đăng nhập</label><input name="username" required></div><div><label>Họ tên</label><input name="ho_ten" required></div>
+<div><label>Mật khẩu</label><input name="password" type="password" required></div>
+<div><label>Vai trò</label><select name="vai_tro"><option value="NHAN_VIEN">Nhân viên</option><option value="QUAN_LY">Quản lý</option></select></div>
+<div style="flex:0"><button class="small">Thêm</button></div></form></div>{% endblock %}

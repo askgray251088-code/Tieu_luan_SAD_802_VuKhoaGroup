@@ -1,0 +1,5 @@
+{% extends "base.html" %}{% block body %}
+<div class="card" style="max-width:420px;margin:auto"><h2>Đăng nhập nhân viên</h2>
+<form method="post"><input type="hidden" name="_csrf" value="{{ csrf_token() }}"><input type="hidden" name="next" value="{{ next }}">
+<label>Tên đăng nhập</label><input name="username" required autofocus><label>Mật khẩu</label><input name="password" type="password" required>
+<p><button>Đăng nhập</button></p></form></div>{% endblock %}
